@@ -1,0 +1,4 @@
+C:\Users\Z\source\repos\calculator\Calculator\Calculator\bin\Debug\netcoreapp3.1\Calculator.exe
+C:\Users\Z\source\repos\calculator\Calculator\Calculator\obj\Debug\netcoreapp3.1\Calculator.csprojAssemblyReference.cache
+C:\Users\Z\source\repos\calculator\Calculator\Calculator\obj\Debug\netcoreapp3.1\Calculator.AssemblyInfoInputs.cache
+C:\Users\Z\source\repos\calculator\Calculator\Calculator\obj\Debug\netcoreapp3.1\Calculator.AssemblyInfo.cs

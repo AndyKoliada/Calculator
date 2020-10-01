@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "229jRFcOKrlbAUzeVgBku8N5GInzFYRBMDpUoosNSPOGsy+AlUX8Iwe5hRLXkQ/yD10OkdseCYIb4ewEcjaNqQ==",
+  "dgSpecHash": "H6aX4e3VcOng3xOMcAr4GHJwZnt8EQuL4GVnaIe2GxQ/EHxwuko0vi/BLnfe/0NBuGAKEOvXXepL0k9EcKbIlQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Z\\source\\repos\\calculator\\Calculator\\Calculator\\Calculator.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Z\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\3.1.8\\microsoft.extensions.dependencyinjection.3.1.8.nupkg.sha512",
+    "C:\\Users\\Z\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\3.1.8\\microsoft.extensions.dependencyinjection.abstractions.3.1.8.nupkg.sha512"
+  ],
   "logs": []
 }

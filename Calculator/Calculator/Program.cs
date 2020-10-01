@@ -1,12 +1,29 @@
-﻿using System;
+﻿using GuessNumber;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace Calculator
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            Console.WriteLine("Hello World!");
+            using (var serviceProvider = SetupDI())
+            {
+                serviceProvider.GetService<App>().Run();
+            }
+        }
+
+        private static ServiceProvider SetupDI()
+        {
+            var services = new ServiceCollection();
+
+            services.AddTransient<IAnimation, TrainAnimation>();
+            services.AddTransient<IGame, Game>();
+
+            services.AddTransient<App>();
+
+            return services.BuildServiceProvider();
         }
     }
 }
