@@ -1,11 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "H6aX4e3VcOng3xOMcAr4GHJwZnt8EQuL4GVnaIe2GxQ/EHxwuko0vi/BLnfe/0NBuGAKEOvXXepL0k9EcKbIlQ==",
+  "dgSpecHash": "aeuCMO//Vg/b3ggOJn7jIvIcb73Gly01E/jxqp3UNZuaB1pkMhgz+29QOopUP3EXEtPpwH9hbzI+zr5z1s5dkw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Z\\source\\repos\\calculator\\Calculator\\Calculator\\Calculator.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Z\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\3.1.8\\microsoft.extensions.dependencyinjection.3.1.8.nupkg.sha512",
-    "C:\\Users\\Z\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\3.1.8\\microsoft.extensions.dependencyinjection.abstractions.3.1.8.nupkg.sha512"
+    "C:\\Users\\Z\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\Z\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
+    "C:\\Users\\Z\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",
+    "C:\\Users\\Z\\.nuget\\packages\\system.runtime\\4.3.0\\system.runtime.4.3.0.nupkg.sha512"
   ],
   "logs": []
 }

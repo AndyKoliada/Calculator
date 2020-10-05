@@ -1,6 +1,23 @@
-﻿using GuessNumber;
-using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿//Реализовать* два режима работы "Калькулятора":
+
+//1) Ввод пользователем в консоли простых операций (без скобок). Выполнение расчёта с соблюдением приоритета операций * / + -
+//Например:
+//ввод с клавиатуры выражения "2+2*3". Программа выводит ответ: "8"
+//ввод с клавиатуры выражения "2/0". Программа должна вывести сообщение об ошибке деления на ноль
+
+//2) Чтение из файла построчно выражений (реализовать рассчёт выражений со скобками).
+//Каждая строка должна быть рассчитана, результат должен быть выведен в отдельный файл.
+//Например содержимое входящего файла:
+//1 + 2 * (3 + 2)
+//1 + x + 4
+//2 + 15 / 3 + 4 * 2
+//Файл результата:
+//1 + 2 * (3 + 2) = 11
+//1 + x + 4 = ошибка в выражении
+//2+15/3+4*2 = 15
+
+//*Реализовать парсинг, разбор выражения, расчёт с учётом математических приоритетов операций без использования сторонних библиотек, 
+//или компонентов, которые выдают готовый результат (типа DataTable.Compute или подобных)
 
 namespace Calculator
 {
@@ -8,22 +25,9 @@ namespace Calculator
     {
         static void Main()
         {
-            using (var serviceProvider = SetupDI())
-            {
-                serviceProvider.GetService<App>().Run();
-            }
+            var input = new ConsoleInput();
+            input.InitialPromt();
         }
 
-        private static ServiceProvider SetupDI()
-        {
-            var services = new ServiceCollection();
-
-            services.AddTransient<IAnimation, TrainAnimation>();
-            services.AddTransient<IGame, Game>();
-
-            services.AddTransient<App>();
-
-            return services.BuildServiceProvider();
-        }
     }
 }
