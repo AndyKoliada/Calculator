@@ -6,20 +6,42 @@ namespace Calculator
 {
     static class App
     {
-        public static void Run(string[] args)
+        public static void Run()
         {
-            bool manualMode = true;
-            while (manualMode)
-            {
-                Printer.Header();
-                Printer.ManualPromt();
-                
-
-                string userWantsToContinue = Console.ReadLine();
-                manualMode = userWantsToContinue?.ToUpper() != "R";
-            }
             Printer.Header();
-            Printer.FileInputPromt();
+            bool modeSelection = true;
+            bool manualMode = true;
+            while (modeSelection)
+            {
+                Console.Write("Press \"M\" to enter manual mode or \"O\" to open file: ");
+
+                string promt = Console.ReadLine();
+
+                if (promt?.ToUpper() == "M")
+                {
+                    break;
+                }
+                else if (promt?.ToUpper() == "O")
+                {
+                    manualMode = false;
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine($"\"{promt}\" is not an option, please try again");
+                }
+
+            }
+
+            if (manualMode)
+            {
+                Printer.ManualPromt();
+            }
+            else
+            {
+                Printer.FileInputPromt();
+            }
+            
 
         }
     }

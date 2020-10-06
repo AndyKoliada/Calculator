@@ -6,9 +6,9 @@ namespace Calculator
 {
     //Modified "Shunting-yard" algorithm by Edgar Dijkstra runs in linear time - O(n).
 
-    class Calculator
+    static class Calculator
     {
-        public int Calculate(string input)
+        public static int Calculate(string input)
         {
             char[] tokens = input.ToCharArray();
 

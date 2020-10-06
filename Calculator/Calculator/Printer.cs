@@ -18,17 +18,27 @@ namespace Calculator
 
         public static void ManualPromt()
         {
-            Console.WriteLine("Please input your expression to calculate : \n(only +-*/() and numbers are supported)");
-            Console.WriteLine("Or type \"R\" to read from file");
-            InputExpression = Console.ReadLine();
+            bool run = true;
+            while (run)
+            {
+                Console.Clear();
+                Header();
+                Console.WriteLine("Please input your expression to calculate\n(only +-*/() and numbers are supported) :");
+                InputExpression = Console.ReadLine();
+                Console.WriteLine($"={Calculator.Calculate(InputExpression)}");
+                Console.WriteLine("Press any key to continue or \"E\" to exit");
+                var promt = Console.ReadLine();
+                run = promt?.ToUpper() != "E";
+            }
         }
 
         public static string FileInputPromt()
         {
-            Console.WriteLine(@"Please, input the path to your text file (format is C:\\textfile.txt): ");
-            FilePath = Console.ReadLine();
-            Console.WriteLine();
-            return FilePath;
+                Console.Clear();
+                Printer.Header();
+                Console.WriteLine("Please, input the path to your expression file");
+                Console.Write(@"(format is C:\\expression.txt): ");
+                return Console.ReadLine();
         }
 
     }

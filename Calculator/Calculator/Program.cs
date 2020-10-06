@@ -23,9 +23,9 @@ namespace Calculator
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            App.Run(args);
+            App.Run();
         }
 
     }
