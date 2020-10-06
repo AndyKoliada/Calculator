@@ -4,12 +4,93 @@ using System.Text;
 
 namespace Calculator
 {
+    //TODO https://github.com/Giorgi/Math-Expression-Evaluator
     //Modified "Shunting-yard" algorithm by Edgar Dijkstra runs in linear time - O(n).
 
     static class Calculator
     {
-        public static int Calculate(string input)
+        internal static int Prec(char ch)
         {
+            switch (ch)
+            {
+                case '+':
+                case '-':
+                    return 1;
+
+                case '*':
+                case '/':
+                    return 2;
+            }
+            return -1;
+        }
+
+        // The main method that converts given infix expression  
+        // to postfix expression.   
+        public static string infixToPostfix(string exp)
+        {
+            // initializing empty String for result  
+            string result = "";
+
+            // initializing empty stack  
+            Stack<char> stack = new Stack<char>();
+
+            for (int i = 0; i < exp.Length; ++i)
+            {
+                char c = exp[i];
+
+                // If the scanned character is an operand, add it to output.  
+                if (char.IsLetterOrDigit(c))
+                {
+                    result += c;
+                }
+
+                // If the scanned character is an '(', push it to the stack.  
+                else if (c == '(')
+                {
+                    stack.Push(c);
+                }
+
+                //  If the scanned character is an ')', pop and output from the stack   
+                // until an '(' is encountered.  
+                else if (c == ')')
+                {
+                    while (stack.Count > 0 && stack.Peek() != '(')
+                    {
+                        result += stack.Pop();
+                    }
+
+                    if (stack.Count > 0 && stack.Peek() != '(')
+                    {
+                        return "Invalid Expression"; // invalid expression 
+                    }
+                    else
+                    {
+                        stack.Pop();
+                    }
+                }
+                else // an operator is encountered 
+                {
+                    while (stack.Count > 0 && Prec(c) <= Prec(stack.Peek()))
+                    {
+                        result += stack.Pop();
+                    }
+                    stack.Push(c);
+                }
+
+            }
+
+            // pop all the operators from the stack  
+            while (stack.Count > 0)
+            {
+                result += stack.Pop();
+            }
+
+            Console.WriteLine(result);
+            return result;
+        }
+        public static int Calculate(string inp)
+        {
+            var input = infixToPostfix(inp);
             char[] tokens = input.ToCharArray();
 
             Stack<int> operands = new Stack<int>();
@@ -66,10 +147,16 @@ namespace Calculator
                     // Push current token to 'ops'.  
                     operations.Push(tokens[i]);
                 }
+                else
+                {
+                    Console.WriteLine("token is not supported");
+                    operations.Clear();
+                }
+                
             }
 
             // Entire expression has been parsed at this point, apply remaining  
-            // ops to remaining values  
+            // operations to remaining values  
             while (operations.Count > 0)
             {
                 operands.Push(applyOp(operations.Pop(), operands.Pop(), operands.Pop()));
