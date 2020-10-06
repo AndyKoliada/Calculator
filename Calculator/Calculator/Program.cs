@@ -23,10 +23,9 @@ namespace Calculator
 {
     class Program
     {
-        static void Main()
+        static void Main(string[] args)
         {
-            var input = new ConsoleInput();
-            input.InitialPromt();
+            App.Run(args);
         }
 
     }
