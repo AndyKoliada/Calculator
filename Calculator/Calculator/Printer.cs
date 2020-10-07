@@ -25,7 +25,8 @@ namespace Calculator
                 Header();
                 Console.WriteLine("Please input your expression to calculate\n(only +-*/() and numbers are supported) :");
                 InputExpression = Console.ReadLine();
-                Console.WriteLine($"={Calculator.Calculate(InputExpression)}");
+                //Console.WriteLine($"={SOCalc.ComputeInfix(InputExpression)}");
+                //SOCalc.ComputeInfix(InputExpression);
                 Console.WriteLine("Press any key to continue or \"E\" to exit");
                 var promt = Console.ReadLine();
                 run = promt?.ToUpper() != "E";

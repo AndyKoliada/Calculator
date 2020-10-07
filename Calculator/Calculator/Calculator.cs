@@ -4,14 +4,13 @@ using System.Text;
 
 namespace Calculator
 {
-    //TODO https://github.com/Giorgi/Math-Expression-Evaluator
-    //Modified "Shunting-yard" algorithm by Edgar Dijkstra runs in linear time - O(n).
+    //Using "Shunting-yard" algorithm by Edgar Dijkstra runs in linear time - O(n).
 
     static class Calculator
     {
-        internal static int Prec(char ch)
+        internal static int Precedence(char op)
         {
-            switch (ch)
+            switch (op)
             {
                 case '+':
                 case '-':
@@ -24,8 +23,7 @@ namespace Calculator
             return -1;
         }
 
-        // The main method that converts given infix expression  
-        // to postfix expression.   
+        // Converting given infix expression to postfix expression.   
         public static string infixToPostfix(string exp)
         {
             // initializing empty String for result  
@@ -70,7 +68,7 @@ namespace Calculator
                 }
                 else // an operator is encountered 
                 {
-                    while (stack.Count > 0 && Prec(c) <= Prec(stack.Peek()))
+                    while (stack.Count > 0 && Precedence(c) <= Precedence(stack.Peek()))
                     {
                         result += stack.Pop();
                     }
@@ -88,6 +86,7 @@ namespace Calculator
             Console.WriteLine(result);
             return result;
         }
+
         public static int Calculate(string inp)
         {
             var input = infixToPostfix(inp);
