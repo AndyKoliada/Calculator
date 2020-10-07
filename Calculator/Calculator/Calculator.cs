@@ -4,7 +4,10 @@ using System.Text;
 
 namespace Calculator
 {
-    //Using "Shunting-yard" algorithm by Edgar Dijkstra runs in linear time - O(n).
+    //Before evaluating expression we converting inxfix notation to postfix(RPN*) using
+    //"Shunting-yard" algorithm by Edgar Dijkstra that runs in linear time - O(n).
+    //*Reverse Polish Notation, RPN, is named after the Polish mathematician Jan Lukasiewicz
+    //RPN expressin evaluation is pretty straightforward.
 
     static class Calculator
     {
