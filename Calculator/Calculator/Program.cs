@@ -25,7 +25,7 @@ namespace Calculator
     {
         static void Main()
         {
-            //App.Run();
+            App.Run();
         }
 
     }

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Calculator
 {
@@ -8,14 +6,14 @@ namespace Calculator
     {
         public static void Run()
         {
-            Printer.Header();
+            Console.Header();
             bool modeSelection = true;
             bool manualMode = true;
             while (modeSelection)
             {
-                Console.Write("Press \"M\" to enter manual mode or \"O\" to open file: ");
+                System.Console.Write("Press \"M\" to enter manual mode or \"O\" to open file: ");
 
-                string promt = Console.ReadLine();
+                string promt = System.Console.ReadLine();
 
                 if (promt?.ToUpper() == "M")
                 {
@@ -28,18 +26,18 @@ namespace Calculator
                 }
                 else
                 {
-                    Console.WriteLine($"\"{promt}\" is not an option, please try again");
+                    System.Console.WriteLine($"\"{promt}\" is not an option, please try again");
                 }
 
             }
 
             if (manualMode)
             {
-                Printer.ManualPromt();
+                Console.ManualPromt();
             }
             else
             {
-                Printer.FileInputPromt();
+                Console.FileInputPromt();
             }
             
 

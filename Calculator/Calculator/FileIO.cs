@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace Calculator
 {
@@ -11,11 +10,11 @@ namespace Calculator
 
         public static void Read()
         {
-            Console.Clear();
-            Printer.Header();
-            Console.WriteLine("Please, input the path to your expression file");
-            Console.Write(@"(format is C:\\expression.txt): ");
-            string filePath = Console.ReadLine();
+            System.Console.Clear();
+            Console.Header();
+            System.Console.WriteLine("Please, input the path to your expression file");
+            System.Console.Write(@"(format is C:\\expression.txt): ");
+            string filePath = System.Console.ReadLine();
 
             {
                 try
@@ -35,20 +34,52 @@ namespace Calculator
                     }
                     //close the file
                     sr.Close();
-                    Console.WriteLine();
+                    System.Console.WriteLine();
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Exception: " + e.Message);
+                    System.Console.WriteLine("Exception: " + e.Message);
                 }
 
             }
 
         }
 
+        public static void ReadS(string filePath)
+        {
+            if (File.Exists(filePath))
+            {
+                string line = "";
+                using (StreamReader sr = new StreamReader(filePath))
+                {
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        //System.Console.WriteLine(line);
+
+
+                        decimal result;
+                        if (Evaluator.TryParse(line, out result))
+                        {
+                            System.Console.WriteLine(result);
+                        }
+                        else
+                        {
+                            System.Console.WriteLine("Not a valid expression");
+                        }
+                    }
+                    System.Console.WriteLine($"Opened file: {Path.GetFileName(filePath)}");
+                }
+            }
+            else
+            {
+                System.Console.WriteLine("File not found");
+            }
+        }
+
         public static void Write()
         {
-
+            //var sw = new StreamWriter();
+            //sw
         }
     }
 }
