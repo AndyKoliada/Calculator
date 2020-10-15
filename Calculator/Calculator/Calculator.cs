@@ -11,9 +11,11 @@ using System.Text.RegularExpressions;
 
 namespace Calculator
 {
-    public static class Evaluator
+    public class Calculator
     {
-        public static decimal Parse(string expression)
+        public string errorMessage;
+
+        public decimal Parse(string expression)
         {
             decimal d;
             if (decimal.TryParse(expression, out d))
@@ -26,7 +28,7 @@ namespace Calculator
             }
         }
 
-        public static bool TryParse(string expression, out decimal value)
+        public bool TryParse(string expression, out decimal value)
         {
             if (IsExpression(expression))
             {
@@ -48,14 +50,14 @@ namespace Calculator
             }
         }
 
-        public static bool IsExpression(string s)
+        public bool IsExpression(string s)
         {
             //Determines whether the string contains illegal characters
             Regex RgxUrl = new Regex("^[0-9+*-/()., ]+$");
             return RgxUrl.IsMatch(s);
         }
 
-        private static List<string> TokenizeExpression(string expression, Dictionary<char, int> operators)
+        private List<string> TokenizeExpression(string expression, Dictionary<char, int> operators)
         {
             List<string> elements = new List<string>();
             string currentElement = string.Empty;
@@ -162,7 +164,7 @@ namespace Calculator
             return elements;
         }
 
-        private static decimal CalculateValue(string expression)
+        private decimal CalculateValue(string expression)
         {
 
             Dictionary<char, int> operatorsPrecedence = new Dictionary<char, int>
@@ -192,7 +194,7 @@ namespace Calculator
                         .Select(op => op.Key).Contains(element[0]));
 
                     //evaluate it's value
-                    value = EvaluateOperation(elements[pos], elements[pos - 1], elements[pos + 1]);
+                    value = EvaluateOperation(elements[pos], elements[pos - 1], elements[pos + 1], out errorMessage);
                     //change the first operand of the operation to the calculated value of the operation
                     elements[pos - 1] = value.ToString();
                     //remove the operator and the second operand from the list
@@ -203,40 +205,79 @@ namespace Calculator
             return value;
         }
 
-        private static decimal EvaluateOperation(string oper, string operand1, string operand2)
+        private decimal EvaluateOperation(string oper, string operand1, string operand2, out string errorMessage)
         {
+            errorMessage = "";
             if (oper.Length == 1)
             {
                 decimal op1 = Parse(operand1);
                 decimal op2 = Parse(operand2);
 
                 decimal value = 0;
-                switch (oper[0])
+
+                if (op1 < decimal.MaxValue & op2 < decimal.MaxValue || op1 > decimal.MinValue & op2 > decimal.MinValue)
                 {
-                    case '+':
-                        value = op1 + op2;
-                        break;
-                    case '-':
-                        value = op1 - op2;
-                        break;
-                    case '*':
-                        value = op1 * op2;
-                        break;
-                    case '/':
-                        {
-                            if (op2 != 0)
-                                value = op1 / op2;
+                    switch (oper[0])
+                    {
+                        case '+':
+                            if (op1 + op2 < decimal.MaxValue)
+                            {
+                                value = op1 + op2;
+                            }
                             else
                             {
-                                decimal result;
-                                TryParse("%", out result);
-                                //System.Console.WriteLine("Error. Division by zero!");
+                                errorMessage = "decimal.MaxValue overflow";
                             }
+                            break;
+                        case '-':
+                            if (op1 - op2 > decimal.MinValue)
+                            {
+                                value = op1 - op2;
+                            }
+                            else
+                            {
+                                errorMessage = "decimal.MinValue overflow";
+                            }
+                            break;
+                        case '*':
+                            if (op1 * op2 < decimal.MaxValue)
+                            {
+                                value = op1 * op2;
+                            }
+                            else
+                            {
+                                errorMessage = "decimal.MaxValue overflow";
+                            }
+                            break;
+                        case '/':
+                            {
+                                if (op2 != 0)
+                                {
+                                    if (op1 / op2 > decimal.MinValue)
+                                    {
+                                        value = op1 / op2;
+                                    }
+                                    else 
+                                    {
+                                        errorMessage = "decimal.MinValue overflow";
+                                    }
+                                }
+                                else
+                                {
+                                    errorMessage = "Division by zero exception";
+                                }
                                 break;
-                        }
-                    default:
-                        throw new ArgumentException("Unsupported operator");
+                            }
+                        default:
+                            errorMessage = "Unsupported operator";
+                            throw new ArgumentException("Unsupported operator");
+                    }
                 }
+                else
+                {
+                    errorMessage = "decimal type capacity overflow";
+                }
+                
                 return value;
             }
             else

@@ -27,14 +27,30 @@ namespace Calculator
                 InputExpression = System.Console.ReadLine();
 
                 decimal result;
-                if (Evaluator.TryParse(InputExpression, out result))
+
+                //if (Calculator.TryParse(InputExpression, out result))
+                //{
+                //    System.Console.WriteLine(result);
+                //}
+                //else
+                //{
+                //    System.Console.WriteLine("Not a valid expression");
+                //}
+
+                var calc = new Calculator();
+
+                calc.TryParse(InputExpression, out result);
+                
+                if (calc.errorMessage == "")
                 {
                     System.Console.WriteLine(result);
                 }
                 else
                 {
-                    System.Console.WriteLine("Not a valid expression");
+                    System.Console.WriteLine(calc.errorMessage);
                 }
+
+
 
 
                 System.Console.WriteLine("Press any key to continue or \"E\" to exit");

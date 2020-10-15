@@ -49,6 +49,8 @@ namespace Calculator
         {
             if (File.Exists(filePath))
             {
+                var calc = new Calculator();
+
                 string line = "";
                 using (StreamReader sr = new StreamReader(filePath))
                 {
@@ -58,7 +60,7 @@ namespace Calculator
 
 
                         decimal result;
-                        if (Evaluator.TryParse(line, out result))
+                        if (calc.TryParse(line, out result))
                         {
                             System.Console.WriteLine(result);
                         }
