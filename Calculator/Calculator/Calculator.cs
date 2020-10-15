@@ -13,7 +13,9 @@ namespace Calculator
 {
     public class Calculator
     {
-        public string errorMessage;
+        public string errorMessage = "";
+
+        decimal value = 0;
 
         public decimal Parse(string expression)
         {
@@ -24,13 +26,13 @@ namespace Calculator
             }
             else
             {
-                return CalculateValue(expression);
+                return CalculateValue(expression, out errorMessage);
             }
         }
 
-        public bool TryParse(string expression, out decimal value)
+        public bool TryParse(string expression, out decimal value, out string errorMessage)
         {
-            if (IsExpression(expression))
+            if (IsExpression(expression, out errorMessage))
             {
                 try
                 {
@@ -50,10 +52,11 @@ namespace Calculator
             }
         }
 
-        public bool IsExpression(string s)
+        public bool IsExpression(string s, out string errorMessage)
         {
             //Determines whether the string contains illegal characters
             Regex RgxUrl = new Regex("^[0-9+*-/()., ]+$");
+            errorMessage = "Unsupported operator";
             return RgxUrl.IsMatch(s);
         }
 
@@ -164,9 +167,9 @@ namespace Calculator
             return elements;
         }
 
-        private decimal CalculateValue(string expression)
+        private decimal CalculateValue(string expression, out string errorMessage)
         {
-
+            errorMessage = "";
             Dictionary<char, int> operatorsPrecedence = new Dictionary<char, int>
             {
                 {'+', 1}, {'-', 1}, {'*', 2}, {'/', 2},
@@ -213,9 +216,7 @@ namespace Calculator
                 decimal op1 = Parse(operand1);
                 decimal op2 = Parse(operand2);
 
-                decimal value = 0;
-
-                if (op1 < decimal.MaxValue & op2 < decimal.MaxValue || op1 > decimal.MinValue & op2 > decimal.MinValue)
+                if (op1 < decimal.MaxValue & op2 < decimal.MaxValue & op1 > decimal.MinValue & op2 > decimal.MinValue)
                 {
                     switch (oper[0])
                     {
@@ -270,20 +271,23 @@ namespace Calculator
                             }
                         default:
                             errorMessage = "Unsupported operator";
-                            throw new ArgumentException("Unsupported operator");
+                            break;
+                            //throw new ArgumentException("Unsupported operator");
                     }
                 }
                 else
                 {
                     errorMessage = "decimal type capacity overflow";
                 }
-                
+
                 return value;
             }
             else
             {
-                throw new ArgumentException("Unsupported operator");
-            }
+                errorMessage = "Unsupported operator";
+                return value;
+                //throw new ArgumentException("Unsupported operator");
+            } 
         }
     }
 }

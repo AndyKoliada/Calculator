@@ -4,6 +4,7 @@ namespace Calculator
 {
     static class Console
     {
+        public static string errorMessage = "";
         public static string FilePath { get; set; }
         public static string InputExpression { get; set; }
 
@@ -28,20 +29,9 @@ namespace Calculator
 
                 decimal result;
 
-                //if (Calculator.TryParse(InputExpression, out result))
-                //{
-                //    System.Console.WriteLine(result);
-                //}
-                //else
-                //{
-                //    System.Console.WriteLine("Not a valid expression");
-                //}
-
                 var calc = new Calculator();
 
-                calc.TryParse(InputExpression, out result);
-                
-                if (calc.errorMessage == "")
+                if (calc.TryParse(InputExpression, out result, out errorMessage) & calc.errorMessage == "")
                 {
                     System.Console.WriteLine(result);
                 }

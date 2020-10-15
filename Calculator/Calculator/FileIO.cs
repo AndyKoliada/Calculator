@@ -6,47 +6,50 @@ namespace Calculator
 {
     static class FileIO
     {
-        public static List<string> TextObject { get; set; } = new List<string>();
+        //public static List<string> TextObject { get; set; } = new List<string>();
 
-        public static void Read()
-        {
-            System.Console.Clear();
-            Console.Header();
-            System.Console.WriteLine("Please, input the path to your expression file");
-            System.Console.Write(@"(format is C:\\expression.txt): ");
-            string filePath = System.Console.ReadLine();
+        //public static void Read()
+        //{
+        //    System.Console.Clear();
+        //    Console.Header();
+        //    System.Console.WriteLine("Please, input the path to your expression file");
+        //    System.Console.Write(@"(format is C:\\expression.txt): ");
+        //    string filePath = System.Console.ReadLine();
 
-            {
-                try
-                {
-                    //Pass the file path and file name to the StreamReader constructor
-                    StreamReader sr = new StreamReader(filePath);
-                    //Read the first line of text
-                    var line = sr.ReadLine();
-                    //Continue to read until you reach end of file
-                    while (line != null)
-                    {
-                        //write the line to console window
-                        //Console.WriteLine(line);
-                        TextObject.Add(line);
-                        //Read the next line
-                        line = sr.ReadLine();
-                    }
-                    //close the file
-                    sr.Close();
-                    System.Console.WriteLine();
-                }
-                catch (Exception e)
-                {
-                    System.Console.WriteLine("Exception: " + e.Message);
-                }
+        //    {
+        //        try
+        //        {
+        //            //Pass the file path and file name to the StreamReader constructor
+        //            StreamReader sr = new StreamReader(filePath);
+        //            //Read the first line of text
+        //            var line = sr.ReadLine();
+        //            //Continue to read until you reach end of file
+        //            while (line != null)
+        //            {
+        //                //write the line to console window
+        //                //Console.WriteLine(line);
+        //                TextObject.Add(line);
+        //                //Read the next line
+        //                line = sr.ReadLine();
+        //            }
+        //            //close the file
+        //            sr.Close();
+        //            System.Console.WriteLine();
+        //        }
+        //        catch (Exception e)
+        //        {
+        //            System.Console.WriteLine("Exception: " + e.Message);
+        //        }
 
-            }
+        //    }
 
-        }
+        //}
+
+        public static string errorMessage = "";
 
         public static void ReadS(string filePath)
         {
+
             if (File.Exists(filePath))
             {
                 var calc = new Calculator();
@@ -56,17 +59,15 @@ namespace Calculator
                 {
                     while ((line = sr.ReadLine()) != null)
                     {
-                        //System.Console.WriteLine(line);
-
-
+                        
                         decimal result;
-                        if (calc.TryParse(line, out result))
+                        if (calc.TryParse(line, out result, out errorMessage) & calc.errorMessage == "")
                         {
-                            System.Console.WriteLine(result);
+                            System.Console.WriteLine(line + " = " + result);
                         }
                         else
                         {
-                            System.Console.WriteLine("Not a valid expression");
+                            System.Console.WriteLine(line + " = " + calc.errorMessage);
                         }
                     }
                     System.Console.WriteLine($"Opened file: {Path.GetFileName(filePath)}");
