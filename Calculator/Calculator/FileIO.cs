@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MathParserTK;
+using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -52,30 +53,45 @@ namespace Calculator
 
             if (File.Exists(filePath))
             {
-                var calc = new Calculator();
+                //var calc = new Calculator();
 
                 string line = "";
                 using (StreamReader sr = new StreamReader(filePath))
                 {
                     while ((line = sr.ReadLine()) != null)
                     {
-                        
-                        decimal result;
-                        if (calc.TryParse(line, out result, out errorMessage) & calc.errorMessage == "")
+                        //Console.WriteLine(line + " = " + parser.Parse(line));
+                        string exc = "";
+                        double result = 0;
+
+                        MathParser parser = new MathParser();
+
+                        try
                         {
-                            System.Console.WriteLine(line + " = " + result);
+                            result = parser.Parse(line);
                         }
-                        else
+                        catch (Exception e)
                         {
-                            System.Console.WriteLine(line + " = " + calc.errorMessage);
+                            exc = e.Message;
+                        }
+                        finally
+                        {
+                            if (exc != "")
+                            {
+                                Console.WriteLine(line + " = " + exc);
+                            }
+                            else
+                            {
+                                Console.WriteLine(line + " = " + result);
+                            }
                         }
                     }
-                    System.Console.WriteLine($"Opened file: {Path.GetFileName(filePath)}");
+                    Console.WriteLine($"Opened file: {Path.GetFileName(filePath)}");
                 }
             }
             else
             {
-                System.Console.WriteLine("File not found");
+                Console.WriteLine("File not found");
             }
         }
 

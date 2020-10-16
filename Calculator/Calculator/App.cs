@@ -6,14 +6,14 @@ namespace Calculator
     {
         public static void Run()
         {
-            Console.Header();
+            UserDialog.Header();
             bool modeSelection = true;
             bool manualMode = true;
             while (modeSelection)
             {
-                System.Console.Write("Press \"M\" to enter manual mode or \"O\" to open file: ");
+                Console.Write("Press \"M\" to enter manual mode or \"O\" to open file: ");
 
-                string promt = System.Console.ReadLine();
+                string promt = Console.ReadLine();
 
                 if (promt?.ToUpper() == "M")
                 {
@@ -26,18 +26,18 @@ namespace Calculator
                 }
                 else
                 {
-                    System.Console.WriteLine($"\"{promt}\" is not an option, please try again");
+                    Console.WriteLine($"\"{promt}\" is not an option, please try again");
                 }
 
             }
 
             if (manualMode)
             {
-                Console.ManualPromt();
+                UserDialog.ManualPromt();
             }
             else
             {
-                Console.FileInputPromt();
+                UserDialog.FileInputPromt();
             }
             
 
