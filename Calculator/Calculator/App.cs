@@ -39,8 +39,6 @@ namespace Calculator
             {
                 UserDialog.FileInputPromt();
             }
-            
-
         }
     }
 }

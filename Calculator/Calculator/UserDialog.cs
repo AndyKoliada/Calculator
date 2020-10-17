@@ -1,5 +1,4 @@
-﻿using MathParserTK;
-using System;
+﻿using System;
 
 namespace Calculator
 {
@@ -32,7 +31,7 @@ namespace Calculator
                 string exc = "";
                 double result = 0;
 
-                MathParser parser = new MathParser();
+                Calculator parser = new Calculator();
 
                 try
                 {
@@ -69,16 +68,13 @@ namespace Calculator
                 Header();
                 Console.WriteLine("Please, input the path to your expression file");
                 Console.Write(@"(format is C:\\expression.txt): ");
-                FileIO.ReadS(Console.ReadLine());
+                FileIO.FileOutput(Console.ReadLine());
 
 
                 Console.WriteLine("Press any key to continue or \"E\" to exit");
                 var promt = Console.ReadLine();
                 run = promt?.ToUpper() != "E";
             }
-
-
-
         }
 
     }
