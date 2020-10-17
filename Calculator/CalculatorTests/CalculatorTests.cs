@@ -15,8 +15,8 @@ namespace Calculator.Tests
         [DataRow("2 + 15 / 3 + 4 * 2", "15")]
         [DataRow("2 / 0", "Second argument is zero")]
         [DataRow("5", "5")]
-        //[DataRow("++4", "Stack empty.")]
-        //[DataRow("--", "Stack empty.")]
+        [DataRow("++4", "Stack empty.")]
+        [DataRow("--", "Stack empty.")]
         [DataRow("0 / 99999999999999999999999999999999999999999999999999999999999999999999", "0")]
         public void ParseTest(string input, string output)
         {
