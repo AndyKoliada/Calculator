@@ -38,21 +38,9 @@ namespace Calculator.Tests
                 {
                     parsed = exc;
                 }
-                //else
-                //{
-                //    Console.WriteLine(line + " = " + result);
-                //    sw.WriteLine(line + " = " + result);
-                //}
             }
 
             Assert.AreEqual(parsed, output);
         }
-    }
-}
-
-namespace CalculatorTests
-{
-    class CalculatorTests
-    {
     }
 }
