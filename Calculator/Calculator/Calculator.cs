@@ -149,15 +149,12 @@ namespace Calculator
                 bool isUnary = pos == 0 || expression[pos - 1] == '(';
                 pos++;
 
-                switch (token.ToString())
+                return (token.ToString()) switch
                 {
-                    case "+":
-                        return isUnary ? UnPlus : Plus;
-                    case "-":
-                        return isUnary ? UnMinus : Minus;
-                    default:
-                        return supportedOperators[token.ToString()];
-                }
+                    "+" => isUnary ? UnPlus : Plus,
+                    "-" => isUnary ? UnMinus : Minus,
+                    _ => supportedOperators[token.ToString()],
+                };
             }
             else if (Char.IsDigit(token[0]))
             {
@@ -235,6 +232,7 @@ namespace Calculator
 
         private bool IsRightAssociated(string token)
         {
+            token.GetHashCode();
             return true;
         }
 
@@ -304,20 +302,12 @@ namespace Calculator
             else if (NumberOfArguments(token) == 1)
             {
                 double arg = stack.Pop();
-                double rst;
-
-                switch (token)
+                var rst = token switch
                 {
-                    case UnPlus:
-                        rst = arg;
-                        break;
-                    case UnMinus:
-                        rst = -arg;
-                        break;
-                    default:
-                        throw new ArgumentException("Unknown operator");
-                }
-
+                    UnPlus => arg,
+                    UnMinus => -arg,
+                    _ => throw new ArgumentException("Unknown operator"),
+                };
                 stack.Push(rst);
             }
             else

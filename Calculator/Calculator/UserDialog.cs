@@ -4,10 +4,9 @@ namespace Calculator
 {
     public class UserDialog
     {
-        //private string FilePath { get; set; }
         private string InputExpression { get; set; }
 
-        public void Header()
+        private void Header()
         {
             Console.Clear();
             Console.WriteLine(new string('#', 30));
@@ -53,10 +52,9 @@ namespace Calculator
             }
         }
 
-        public void ManualPromt()
+        private void ManualPromt()
         {
-            bool run = true;
-            while (run)
+            while (true)
             {
                 Console.Clear();
                 Header();
@@ -71,19 +69,18 @@ namespace Calculator
                 }
                 catch (Exception e)
                 {
-                        Console.WriteLine(e.Message);
+                    Console.WriteLine(e.Message);
                 }
 
                 Console.WriteLine("Press any key to continue or \"E\" to exit");
-                var promt = Console.ReadLine();
-                run = promt?.ToUpper() != "E";
+
+                if (Console.ReadLine().ToUpper() == "E") break;
             }
         }
 
-        public void FileInputPromt()
+        private void FileInputPromt()
         {
-            bool run = true;
-            while (run)
+            while (true)
             {
                 Console.Clear();
                 Header();
@@ -92,10 +89,9 @@ namespace Calculator
                 var fIO = new FileIO();
                 fIO.FileOutput(Console.ReadLine());
 
-
                 Console.WriteLine("Press any key to continue or \"E\" to exit");
-                var promt = Console.ReadLine();
-                run = promt?.ToUpper() != "E";
+
+                if(Console.ReadLine().ToUpper() == "E") break;
             }
         }
 
