@@ -18,6 +18,8 @@ namespace Calculator
 
         private const string Plus = OperatorMarker + "+";
         private const string Minus = OperatorMarker + "-";
+        private const string UnPlus = OperatorMarker + "un+";
+        private const string UnMinus = OperatorMarker + "un-";
         private const string Multiply = OperatorMarker + "*";
         private const string Divide = OperatorMarker + "/";
         private const string LeftParent = OperatorMarker + "(";
@@ -146,16 +148,28 @@ namespace Calculator
             StringBuilder token = new StringBuilder();
             token.Append(expression[pos]);
 
-            // If it is an operator
+            // If it is a operator
             if (supportedOperators.ContainsKey(token.ToString()))
             {
+                // Determine it is unary or binary operator
+                bool isUnary = pos == 0 || expression[pos - 1] == '(';
                 pos++;
-                return supportedOperators[token.ToString()];
-                
+
+                switch (token.ToString())
+                {
+                    case "+":
+                        return isUnary ? UnPlus : Plus;
+                    case "-":
+                        return isUnary ? UnMinus : Minus;
+                    default:
+                        return supportedOperators[token.ToString()];
+                }
             }
-            
             else if (Char.IsDigit(token[0]))
             {
+                // Read number
+
+                // Read the whole part of number
                 if (Char.IsDigit(token[0]))
                 {
                     while (++pos < expression.Length
@@ -164,6 +178,13 @@ namespace Calculator
                         token.Append(expression[pos]);
                     }
                 }
+                else
+                {
+                    // Because system decimal separator
+                    // will be added below
+                    token.Clear();
+                }
+
 
                 return NumberMaker + token.ToString();
             }
@@ -243,6 +264,9 @@ namespace Calculator
                 case Plus:
                 case Minus:
                     return 2;
+                case UnPlus:
+                case UnMinus:
+                    return 5;
                 case Multiply:
                 case Divide:
                     return 4;
@@ -302,6 +326,12 @@ namespace Calculator
 
                 switch (token)
                 {
+                    case UnPlus:
+                        rst = arg;
+                        break;
+                    case UnMinus:
+                        rst = -arg;
+                        break;
                     case Plus:
                         rst = arg1 + arg2;
                         break;
@@ -326,6 +356,23 @@ namespace Calculator
             }
 
             return stack;
+        }
+
+        private int NumberOfArguments(string token)
+        {
+            switch (token)
+            {
+                case UnPlus:
+                case UnMinus:
+                    return 1;
+                case Plus:
+                case Minus:
+                case Multiply:
+                case Divide:
+                    return 2;
+                default:
+                    throw new ArgumentException("Unknown operator");
+            }
         }
 
     }

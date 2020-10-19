@@ -31,7 +31,8 @@ namespace Calculator
                 string exc = "";
                 double result = 0;
 
-                Calculator parser = new Calculator();
+                //Calculator parser = new Calculator();
+                MathParser parser = new MathParser();
 
                 try
                 {

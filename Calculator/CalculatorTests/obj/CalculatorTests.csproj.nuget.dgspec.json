@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Andy\\Source\\Repos\\calculator\\Calculator\\CalculatorTests\\CalculatorTests.csproj": {}
+    "C:\\Users\\Z\\source\\repos\\calculator\\Calculator\\CalculatorTests\\CalculatorTests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Andy\\Source\\Repos\\calculator\\Calculator\\CalculatorTests\\CalculatorTests.csproj": {
+    "C:\\Users\\Z\\source\\repos\\calculator\\Calculator\\CalculatorTests\\CalculatorTests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Andy\\Source\\Repos\\calculator\\Calculator\\CalculatorTests\\CalculatorTests.csproj",
+        "projectUniqueName": "C:\\Users\\Z\\source\\repos\\calculator\\Calculator\\CalculatorTests\\CalculatorTests.csproj",
         "projectName": "CalculatorTests",
-        "projectPath": "C:\\Users\\Andy\\Source\\Repos\\calculator\\Calculator\\CalculatorTests\\CalculatorTests.csproj",
-        "packagesPath": "C:\\Users\\Andy\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Andy\\Source\\Repos\\calculator\\Calculator\\CalculatorTests\\obj\\",
+        "projectPath": "C:\\Users\\Z\\source\\repos\\calculator\\Calculator\\CalculatorTests\\CalculatorTests.csproj",
+        "packagesPath": "C:\\Users\\Z\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Z\\source\\repos\\calculator\\Calculator\\CalculatorTests\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\Andy\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Z\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -31,8 +31,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\Andy\\Source\\Repos\\calculator\\Calculator\\Calculator\\Calculator.csproj": {
-                "projectPath": "C:\\Users\\Andy\\Source\\Repos\\calculator\\Calculator\\Calculator\\Calculator.csproj"
+              "C:\\Users\\Z\\source\\repos\\calculator\\Calculator\\Calculator\\Calculator.csproj": {
+                "projectPath": "C:\\Users\\Z\\source\\repos\\calculator\\Calculator\\Calculator\\Calculator.csproj"
               }
             }
           }
@@ -82,20 +82,20 @@
         }
       }
     },
-    "C:\\Users\\Andy\\Source\\Repos\\calculator\\Calculator\\Calculator\\Calculator.csproj": {
+    "C:\\Users\\Z\\source\\repos\\calculator\\Calculator\\Calculator\\Calculator.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Andy\\Source\\Repos\\calculator\\Calculator\\Calculator\\Calculator.csproj",
+        "projectUniqueName": "C:\\Users\\Z\\source\\repos\\calculator\\Calculator\\Calculator\\Calculator.csproj",
         "projectName": "Calculator",
-        "projectPath": "C:\\Users\\Andy\\Source\\Repos\\calculator\\Calculator\\Calculator\\Calculator.csproj",
-        "packagesPath": "C:\\Users\\Andy\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Andy\\Source\\Repos\\calculator\\Calculator\\Calculator\\obj\\",
+        "projectPath": "C:\\Users\\Z\\source\\repos\\calculator\\Calculator\\Calculator\\Calculator.csproj",
+        "packagesPath": "C:\\Users\\Z\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Z\\source\\repos\\calculator\\Calculator\\Calculator\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\Andy\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Z\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
