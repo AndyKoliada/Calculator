@@ -25,7 +25,8 @@ namespace Calculator
     {
         static void Main()
         {
-            App.Run();
+            var ud = new UserDialog();
+            ud.InitializeDialog();
         }
 
     }

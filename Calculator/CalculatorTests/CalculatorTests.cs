@@ -10,6 +10,7 @@ namespace Calculator.Tests
     public class CalculatorTests
     {
         [DataTestMethod]
+        [DataRow("-5+1", "-4")]
         [DataRow("1+2*(3+2)", "11")]
         [DataRow("1 + x + 4", "Unknown token in expression")]
         [DataRow("2 + 15 / 3 + 4 * 2", "15")]

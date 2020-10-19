@@ -3,17 +3,16 @@ using System.IO;
 
 namespace Calculator
 {
-    static class FileIO
+    public class FileIO
     {
-        public static string errorMessage = "";
-        public static string inputFileName;
+        private string inputFileName;
 
-        public static void FileOutput(string filePath)
+        public void FileOutput(string filePath)
         {
 
             if (File.Exists(filePath))
             {
-                string line = "";
+                string line;
                 using (StreamReader sr = new StreamReader(filePath))
                 {
                     inputFileName = Path.GetFileNameWithoutExtension(filePath);
@@ -26,32 +25,19 @@ namespace Calculator
 
                     while ((line = sr.ReadLine()) != null)
                     {
-                        string exc = "";
-                        double result = 0;
-
                         Calculator parser = new Calculator();
 
                         try
                         {
-                            result = parser.Parse(line);
+                            Console.WriteLine(line + " = " + parser.Parse(line));
+                            sw.WriteLine(line + " = " + parser.Parse(line));
                         }
                         catch (Exception e)
                         {
-                            exc = e.Message;
+                            Console.WriteLine(line + " = " + e.Message);
+                            sw.WriteLine(line + " = " + e.Message);
                         }
-                        finally
-                        {
-                            if (exc != "")
-                            {
-                                Console.WriteLine(line + " = " + exc);
-                                sw.WriteLine(line + " = " + exc);
-                            }
-                            else
-                            {
-                                Console.WriteLine(line + " = " + result);
-                                sw.WriteLine(line + " = " + result);
-                            }
-                        }
+
                     }
                     sw.Close();
                     Console.WriteLine();

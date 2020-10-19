@@ -77,7 +77,7 @@ namespace Calculator
             }
 
             StringBuilder formattedString = new StringBuilder();
-            int balanceOfParenth = 0; // Check number of parenthesis
+            int balanceOfParenth = 0;
 
             for (int i = 0; i < expression.Length; i++)
             {
@@ -112,22 +112,19 @@ namespace Calculator
 
         private string ConvertToRPN(string expression)
         {
-            int pos = 0; // Current position
+            int pos = 0;
             StringBuilder outputString = new StringBuilder();
             Stack<string> stack = new Stack<string>();
 
-            // While there is unhandled char in expression
             while (pos < expression.Length)
             {
                 string token = LexicalAnalysisInfixNotation(expression, ref pos);
 
                 outputString = SyntaxAnalysisInfixNotation(token, outputString, stack);
             }
-
-            // Pop all elements from stack to output string            
+        
             while (stack.Count > 0)
             {
-                // There should be only operators
                 if (stack.Peek()[0] == OperatorMarker[0])
                 {
                     outputString.Append(stack.Pop());
@@ -144,14 +141,11 @@ namespace Calculator
 
         private string LexicalAnalysisInfixNotation(string expression, ref int pos)
         {
-            // Receive first char
             StringBuilder token = new StringBuilder();
             token.Append(expression[pos]);
 
-            // If it is a operator
             if (supportedOperators.ContainsKey(token.ToString()))
             {
-                // Determine it is unary or binary operator
                 bool isUnary = pos == 0 || expression[pos - 1] == '(';
                 pos++;
 
@@ -167,9 +161,6 @@ namespace Calculator
             }
             else if (Char.IsDigit(token[0]))
             {
-                // Read number
-
-                // Read the whole part of number
                 if (Char.IsDigit(token[0]))
                 {
                     while (++pos < expression.Length
@@ -180,8 +171,6 @@ namespace Calculator
                 }
                 else
                 {
-                    // Because system decimal separator
-                    // will be added below
                     token.Clear();
                 }
 
@@ -195,26 +184,21 @@ namespace Calculator
         }
 
         private StringBuilder SyntaxAnalysisInfixNotation(string token, StringBuilder outputString, Stack<string> stack)
-        {
-            // If it's a number just put to string            
+        {           
             if (token[0] == NumberMaker[0])
             {
                 outputString.Append(token);
             }
             else if (token[0] == FunctionMarker[0])
             {
-                // if it's a function push to stack
                 stack.Push(token);
             }
             else if (token == LeftParent)
             {
-                // If its '(' push to stack
                 stack.Push(token);
             }
             else if (token == RightParent)
             {
-                // If its ')' pop elements from stack to output string
-                // until find the ')'
 
                 string elem;
                 while ((elem = stack.Pop()) != LeftParent)
@@ -222,7 +206,6 @@ namespace Calculator
                     outputString.Append(elem);
                 }
 
-                // if after this a function is in the peek of stack then put it to string
                 if (stack.Count > 0 &&
                     stack.Peek()[0] == FunctionMarker[0])
                 {
@@ -302,7 +285,8 @@ namespace Calculator
             token.Append(expression[pos++]);
 
             while (pos < expression.Length && expression[pos] != NumberMaker[0]
-                && expression[pos] != OperatorMarker[0])
+                && expression[pos] != OperatorMarker[0]
+                && expression[pos] != FunctionMarker[0])
             {
                 token.Append(expression[pos++]);
             }
@@ -316,12 +300,10 @@ namespace Calculator
             {
                 stack.Push(double.Parse(token.Remove(0, 1)));
             }
-            
-            else
-            {
-                double arg2 = stack.Pop();
-                double arg1 = stack.Pop();
 
+            else if (NumberOfArguments(token) == 1)
+            {
+                double arg = stack.Pop();
                 double rst;
 
                 switch (token)
@@ -332,6 +314,21 @@ namespace Calculator
                     case UnMinus:
                         rst = -arg;
                         break;
+                    default:
+                        throw new ArgumentException("Unknown operator");
+                }
+
+                stack.Push(rst);
+            }
+            else
+            {
+                double arg2 = stack.Pop();
+                double arg1 = stack.Pop();
+
+                double rst;
+
+                switch (token)
+                {
                     case Plus:
                         rst = arg1 + arg2;
                         break;
